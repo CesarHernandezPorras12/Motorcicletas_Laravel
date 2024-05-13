@@ -102,8 +102,8 @@ class ProductController extends Controller
     $product->slug = $slug;
     $product->save();
 
-    // Redirecciona a la página de detalles del producto o a cualquier otra página
-    return redirect()->route('products.show', $product->id)->with('success', 'Producto actualizado correctamente.');
+      // Redirecciona a la página de detalles del producto actualizado
+        return redirect()->route('products.show', $product->slug)->with('success', 'Producto actualizado correctamente.');
 }
         
     

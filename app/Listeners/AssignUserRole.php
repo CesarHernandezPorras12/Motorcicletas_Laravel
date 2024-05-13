@@ -16,8 +16,9 @@ class AssignUserRole
      */
     public function handle(UserCreated $event)
     {
-        // Asignar el rol de cliente (priority 2) por defecto al nuevo usuario
+        // Asignar el rol de cliente (priority 0) por defecto al nuevo usuario
         $event->user->priority = 2;
         $event->user->save();
     }
 }
+

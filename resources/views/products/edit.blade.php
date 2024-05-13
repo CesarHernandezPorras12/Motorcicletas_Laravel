@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="container">
+        <div class="mb-3">
+            <a href="{{ route('products.index') }}" class="btn btn-secondary">Regresar a Productos</a>
+        </div>
         <h1>Editar Producto</h1>
         <form action="{{ route('products.update', $product->id) }}" method="POST">
             @csrf
