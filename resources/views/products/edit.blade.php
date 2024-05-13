@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container bg-light">
         <div class="mb-3">
             <a href="{{ route('products.index') }}" class="btn btn-secondary">Regresar a Productos</a>
         </div>

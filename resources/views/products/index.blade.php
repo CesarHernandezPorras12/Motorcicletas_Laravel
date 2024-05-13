@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container bg-light">
         <h1>Listado de Productos</h1>
         <!-- Botón para agregar un nuevo producto -->
         @if(Auth::user() && Auth::user()->priority != 0)
             <div class="mb-3">
-                <a href="{{ route('products.create') }}" class="btn btn-success">Agregar Producto</a>
+                <a href="{{ route('products.create') }}" class="btn btn-dark text-white">Agregar Producto</a>
             </div>
         @endif
         <!-- Tarjetas de productos existentes -->
@@ -22,18 +22,18 @@
                             <div class="row">
                                 @if(Auth::user() && Auth::user()->priority != 0)
                                     <div class="col-auto">
-                                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm">Editar</a>
+                                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-dark text-primary">Editar</a>
                                     </div>
                                     <div class="col">
                                         <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                            <button type="submit" class="btn btn-dark text-danger">Eliminar</button>
                                         </form>
                                     </div>
                                 @endif
                                 <div class="col-auto">
-                                    <a href="{{ route('products.show', $product->slug) }}" class="btn btn-primary btn-sm">Ver Detalles</a>
+                                    <a href="{{ route('products.show', $product->slug) }}" class="btn btn-dark text-white">Ver Detalles</a>
                                 </div>
                             </div>
                         </div>

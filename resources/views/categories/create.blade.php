@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container bg-light">
         <h1>Crear Nueva Categoría</h1>
         <form action="{{ route('categories.store') }}" method="POST">
             @csrf
