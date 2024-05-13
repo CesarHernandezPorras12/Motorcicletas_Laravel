@@ -18,10 +18,10 @@ return new class extends Migration
             $table->decimal('price', 10, 2);
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->string('photo')->nullable(); // Nueva columna "Photo"
+            $table->string('photo')->nullable(); // Columna existente
+            $table->string('slug')->unique()->nullable(); // Nueva columna "slug"
             $table->timestamps();
         });        
-        
     }
 
     /**

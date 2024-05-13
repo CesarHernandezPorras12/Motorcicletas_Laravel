@@ -2,23 +2,32 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * The event listener mappings for the application.
+     *
+     * @var array
      */
-    public function register(): void
-    {
-        //
-    }
+    protected $listen = [
+        'App\Events\UserCreated' => [
+            'App\Listeners\AssignUserRole',
+        ],
+    ];
 
     /**
-     * Bootstrap any application services.
+     * Register any events for your application.
+     *
+     * @return void
      */
-    public function boot(): void
+    public function boot()
     {
+        // Remove the line below
+        //parent::boot();
+
         //
     }
 }

@@ -3,31 +3,44 @@
 @section('content')
     <div class="container">
         <h1>Listado de Productos</h1>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($products as $product)
-                    <tr>
-                        <td>{{ $product->id }}</td>
-                        <td>{{ $product->name }}</td>
-                        <td>
-                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary">Editar</a>
-                            <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Eliminar</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <!-- Botón para agregar un nuevo producto -->
+        @if(Auth::user() && Auth::user()->priority != 0)
+            <div class="mb-3">
+                <a href="{{ route('products.create') }}" class="btn btn-success">Agregar Producto</a>
+            </div>
+        @endif
+        <!-- Tarjetas de productos existentes -->
+        <div class="row row-cols-1 row-cols-md-3">
+            @foreach ($products as $product)
+                <div class="col mb-3">
+                    <div class="card">
+                        <img src="{{ asset('Fotos/' . basename($product->photo)) }}" class="card-img-top" alt="Imagen del producto">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $product->name }}</h5>
+                            <p class="card-text">{{ $product->description }}</p>
+                            <p class="card-text">Precio: ${{ number_format($product->price, 2, ',', '.') }}</p>
+                            <div class="row">
+                                @if(Auth::user() && Auth::user()->priority != 0)
+                                    <div class="col-auto">
+                                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm">Editar</a>
+                                    </div>
+                                    <div class="col">
+                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                        </form>
+                                    </div>
+                                @endif
+                                <div class="col-auto">
+                                    <a href="{{ route('products.show', $product->slug) }}" class="btn btn-primary btn-sm">Ver Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
 @endsection
 
